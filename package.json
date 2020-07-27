@@ -1,0 +1,32 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "description": "Server side implementation with Node.js & Express.js & Pug",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akmatworld/Store.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "Pug"
+  ],
+  "author": "Sirazhidinov Akmatali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akmatworld/Store/issues"
+  },
+  "homepage": "https://github.com/Akmatworld/Store#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "pug": "^3.0.0"
+  }
+}
