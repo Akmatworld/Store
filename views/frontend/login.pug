@@ -1,0 +1,13 @@
+doctype html
+html
+  include head.pug
+  body
+    h1= message
+    form(action='/account/login' method='post')
+      input(type='text' name='login' placeholder='Enter your email or login')
+      br
+      input(type='password' name='password' placeholder='password')
+      br
+      input(type='submit')
+    a(href='/account/register') Sign up
+    include footer.pug

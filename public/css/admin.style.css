@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.container {
+    display: flex;
+    height: 100%;
+}
+.sidebar {
+    max-width: 200px;
+    flex-grow: 2;
+    border-right: 1px solid #ccc;
+}
+.sidebar ul li {
+    list-style: none;
+    padding: 4px 5px;
+}
+.sidebar a {
+    text-decoration: none;
+}
+.content {
+    flex-grow: 10;
+}
+
+/* First registration */
+.first-reg {
+    margin: 0 auto;
+}
+.first-reg h1 {
+    text-align: center;
+    margin: 20px 0 20px;
+}
