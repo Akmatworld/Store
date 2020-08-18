@@ -39,6 +39,7 @@ app.use(session(
 // Front end
 app.get('/', (req, res) => {
     res.send('ok');
+    console.log('db');
 });
 
 

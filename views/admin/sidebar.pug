@@ -1,0 +1,16 @@
+.sidebar
+  h3.adminpaneltitle
+    a(href= baseUrl) Админ панель
+  p.login-text Вы вошли как&nbsp;
+    a(href=""+ baseUrl +"account/ " + id+ "") 
+      span= login
+  nav
+    ul
+      li
+        a(href=""+ baseUrl +"/productlist/") Список товаров
+      li
+        a(href=""+ baseUrl +"/addproduct") Добавить новый товар
+      li
+        a(href=""+ baseUrl +"/settings") Настройки
+      li
+        a(href=""+ baseUrl +"/logout") Выйти

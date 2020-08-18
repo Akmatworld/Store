@@ -4,22 +4,14 @@ html(lang="en")
   body
     .container
       .first-reg
-        h1.welcome-h1 Добро пожаловать
-        p В вашей системе сейчас нет никаких пользователей, пожалуйста зарегистрируйтесь.
-        form(action="/sadmin/firstreg" method="post")
-          .form-group
-            input#exampleInputPassword1.form-control(type='text' name="sname" placeholder='Фамилия')
-          .form-group
-            input#exampleInputPassword1.form-control(type='text' name="name" placeholder='Имя')
-          .form-group
-            input#exampleInputEmail1.form-control(type='email' name="email" aria-describedby='emailHelp' placeholder='Email')
+        h1.welcome-h1 Вход
+        form(action="/sadmin/signin" method="post")
           .form-group
             input#exampleInputPassword1.form-control(type='text' name="login" placeholder='Логин')
           .form-group
             input#exampleInputPassword1.form-control(type='password' name="password" placeholder='Пароль')
-          .form-group
-            input#exampleInputPassword1.form-control(type='password' name="password" placeholder='Повторите пароль')
-          button.btn.btn-primary(type='submit') Регистрация
+          button.btn.btn-primary(type='submit') Вход
+          p.error-text= error
 
 
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')

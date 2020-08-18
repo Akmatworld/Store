@@ -9,6 +9,7 @@ html, body {
     display: flex;
     height: 100%;
 }
+/* Side bar */ 
 .sidebar {
     max-width: 200px;
     flex-grow: 2;
@@ -16,7 +17,7 @@ html, body {
 }
 .sidebar ul li {
     list-style: none;
-    padding: 4px 5px;
+    padding: 4px 4px 0 0;
 }
 .sidebar a {
     text-decoration: none;
@@ -32,4 +33,17 @@ html, body {
 .first-reg h1 {
     text-align: center;
     margin: 20px 0 20px;
+}
+
+/* Class for error text */
+.error-text {
+    color: red;
+}
+
+/* Admin panel title */
+.adminpaneltitle a {
+    color: #000;
+}
+.adminpaneltitle a:hover {
+    color: rgb(136, 129, 129);
 }
