@@ -1,6 +1,5 @@
 const express = require('express');
 const adminRoute = express.Router();
-const FregisterModel = require('../model/adminPModel.js');
 const { Authorization } = require('../model/adminPModel.js');
 
 function checkSession(req, res, next) {

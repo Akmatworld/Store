@@ -26,11 +26,11 @@ html, body {
     flex-grow: 10;
 }
 
-/* First registration */
-.first-reg {
+/* Sign in */
+.signin {
     margin: 0 auto;
 }
-.first-reg h1 {
+.signin h1 {
     text-align: center;
     margin: 20px 0 20px;
 }

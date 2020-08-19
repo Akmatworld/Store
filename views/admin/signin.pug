@@ -3,7 +3,7 @@ html(lang="en")
   include head.pug
   body
     .container
-      .first-reg
+      .signin
         h1.welcome-h1 Вход
         form(action="/sadmin/signin" method="post")
           .form-group
@@ -11,7 +11,7 @@ html(lang="en")
           .form-group
             input#exampleInputPassword1.form-control(type='password' name="password" placeholder='Пароль')
           button.btn.btn-primary(type='submit') Вход
-          p.error-text= error
+        span.error-text= error
 
 
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
