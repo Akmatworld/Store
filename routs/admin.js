@@ -44,4 +44,12 @@ adminRoute.get('/settings', checkSession, (req, res) => {
     res.render('admin/settings', {title: 'Настройки',  login: req.session.login, baseUrl: req.baseUrl});
 });
 
+adminRoute.use((req, res, next) => {
+    res.status(404).render('admin/404adminpage',
+    {
+        title: 'Page not found',
+        message: '404 Page not found!'
+    });
+})
+
 module.exports = adminRoute;

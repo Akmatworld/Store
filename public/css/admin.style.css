@@ -47,3 +47,22 @@ html, body {
 .adminpaneltitle a:hover {
     color: rgb(136, 129, 129);
 }
+
+/* 404 admin page */
+.error-404-div {
+    text-align: center;
+}
+.error-404-div h1 {
+    margin: 20px 0;
+}
+
+.back-to-home404 {
+    text-decoration: none;
+    border: 1px solid #888;
+    padding: 4px 7px;
+}
+.back-to-home404:hover {
+    text-decoration: none;
+    background-color: rgb(5, 37, 73);
+    color: #fff;
+}
