@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 // Backend
 app.use('/sadmin', admin);
 
-// Handler for 404 error
+// 404 error hundler for fronend
 app.use((req, res, next) => {
     res.status(404).render('frontend/404page',
     {
