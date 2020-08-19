@@ -66,3 +66,23 @@ html, body {
     background-color: rgb(5, 37, 73);
     color: #fff;
 }
+
+/* Content */
+.content-title {
+    font-size: 22px;
+    margin: 12px 0;
+    text-align: center;
+}
+.content table {
+    font-size: 15px;
+}
+.content table td,
+.content table th {
+    padding: 2px;
+}
+
+/* List of users */
+.users-list-form {
+    display: flex;
+    justify-content: space-around;
+}

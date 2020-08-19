@@ -1,0 +1,16 @@
+include head.pug
+body
+  .container
+    include sidebar.pug
+    .content
+      h3.content-title Информация о пользователе
+      p= data.id
+      p= data.fname
+      p= data.name
+      p= data.email
+      p= data.phone
+      p= data.login
+      p= data.permission
+      p= data.photo
+     
+  include footer.pug

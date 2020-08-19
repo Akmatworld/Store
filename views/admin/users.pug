@@ -1,0 +1,27 @@
+include head.pug
+body
+  .container
+    include sidebar.pug
+    .content
+      h3.content-title Список пользователей системы
+      if data.length
+        table.table
+          thead.thead-dark
+            tr
+              th(scope='col') ФИО
+              th(scope='col') Доступ
+              th(scope='col') Управление
+          tbody
+            each obj in data
+              tr
+                td= obj.fname + ' ' + obj.name
+                td= obj.permission
+                td.users-list-form
+                  a(href=""+ baseUrl + "/users/" + obj.id)
+                    button(class="btn btn-info") Посмотреть
+                  a(href="" + baseUrl + "/users/detele/" + obj.id)
+                    button(class="btn btn-danger") Удалить
+      else
+        p Список пользователей пуст 
+
+  include footer.pug

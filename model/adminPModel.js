@@ -51,7 +51,53 @@ class Authorization {
     }
   }
 }
+
+// Get list of users
+class Users {
+  constructor(req, res) {
+    this.req = req;
+    this.res = res;
+  }
+  getAllUsers() {
+    let users = [];
+    let sql = `SELECT id, fname, name, permission FROM adminpanel`;
+
+    db.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        if (results.length) {
+          
+          for (let i = 0; i < results.length; i++) {
+            if (results[i].permission === 0) {
+              results[i].permission = 'Админ';
+            } else {
+              results[i].permission = 'Редактор';
+            }
+          }
+
+          this.res.render('admin/users', {title: 'Пользователи',  data: results, login: this.req.session.login, baseUrl: this.req.baseUrl});
+        } else {
+          this.res.render('admin/users', {title: 'Пользователи',  data: [], login: this.req.session.login, baseUrl: this.req.baseUrl});
+        }
+    });
+  }
+  getUser() {
+    let sql = `SELECT * FROM adminpanel WHERE id=${this.req.params.id}`;
+
+    db.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        
+        if (results.length) {
+          results[0].permission = (results[0].permission === 0) ? 'Админ' : 'Редактор';
+          this.res.render('admin/user', {title: 'Пользователи',  data: results[0], login: this.req.session.login, baseUrl: this.req.baseUrl});
+        } else {
+          this.res.render('admin/user', {title: 'Пользователи',  data: {}, login: this.req.session.login, baseUrl: this.req.baseUrl});
+        }
+    });
+  }
+}
+
 module.exports = {
   adminPModel,
-  Authorization
+  Authorization,
+  Users
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const adminRoute = express.Router();
-const { Authorization } = require('../model/adminPModel.js');
+const { Authorization, Users } = require('../model/adminPModel.js');
 
 function checkSession(req, res, next) {
     if (!req.session.login) {
@@ -30,18 +30,33 @@ adminRoute.post('/signin', (req, res) => {
     new Authorization(req, res).auth();
 });
 
-// Logic
 adminRoute.get('/', checkSession, (req, res) => {
     res.render('admin/adminpanel', {title: 'Главный', login: req.session.login, baseUrl: req.baseUrl});
 });
+
 adminRoute.get('/productlist', checkSession, (req, res) => {
     res.render('admin/productlist', {title: 'Продукты',  login: req.session.login, baseUrl: req.baseUrl});
 });
+
 adminRoute.get('/addproduct', checkSession, (req, res) => {
     res.render('admin/addproduct', {title: 'Добавить новый продукт',  login: req.session.login, baseUrl: req.baseUrl});
 });
+
 adminRoute.get('/settings', checkSession, (req, res) => {
     res.render('admin/settings', {title: 'Настройки',  login: req.session.login, baseUrl: req.baseUrl});
+});
+
+adminRoute.get('/users', checkSession, (req, res) => {
+    new Users(req, res).getAllUsers();
+});
+
+adminRoute.get('/users/:id', checkSession, (req, res) => {
+    new Users(req, res).getUser();
+});
+
+adminRoute.get('/users/:action/:id', checkSession, (req, res) => {
+    console.log(req.params);
+    // delete
 });
 
 adminRoute.use((req, res, next) => {
