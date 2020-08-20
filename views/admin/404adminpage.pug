@@ -1,8 +1,5 @@
-doctype html
-html
-  include head.pug
-  body
-    .error-404-div
-      h1.message404= message
-      a(href='/sadmin' class="back-to-home404") Back to admin panel
-    include footer.pug
+include head.pug
+body
+  .error-404
+    h1.message404= message
+    a(href='/sadmin' class="back-to-home404") Back to admin panel

@@ -1,3 +1,6 @@
+html, body {
+    height: 100% !important;
+}
 .custom-content {
     margin: 10px 0 0 0;
 }
@@ -9,4 +12,32 @@
 }
 .exit {
     margin-left: 5px;
+}
+.error-404 {
+    text-align: center;
+}
+.error-404 h1 {
+    margin: 40px 0;
+}
+.error-404 a {
+    border: 1px solid #ccc;
+    padding: 4px 5px;
+}
+.error-404 a:hover {
+    background-color: rgb(36, 85, 126);
+    color: #fff;
+}
+.sigin {
+    width: 400px;
+}
+.custom-wrapper-signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.text-error-signin {
+    color: red;
+    font-weight: normal;
+    font-size: 18px;
 }

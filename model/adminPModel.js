@@ -45,7 +45,7 @@ class Authorization {
                 this.req.session.login = this.login;
                 this.res.redirect('/sadmin/');
             } else {
-                this.res.render('admin/signin', {title: 'Вход в систему', error: 'Логин или пароль не правильный, повторите попытку'});
+                this.res.render('admin/signin', {title: 'Вход в систему', error: 'Логин или пароль не правильный', baseUrl: this.req.baseUrl});
             }
         });
     }

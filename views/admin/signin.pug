@@ -1,19 +1,37 @@
-<!DOCTYPE html>
-html(lang="en")
-  include head.pug
-  body
-    .container
-      .signin
-        h1.welcome-h1 Вход
-        form(action="/sadmin/signin" method="post")
-          .form-group
-            input#exampleInputPassword1.form-control(type='text' name="login" placeholder='Логин')
-          .form-group
-            input#exampleInputPassword1.form-control(type='password' name="password" placeholder='Пароль')
-          button.btn.btn-primary(type='submit') Вход
-        span.error-text= error
+include head.pug
+body
+  // Site wrapper
+  .wrapper.custom-wrapper-signin
+    .sigin
+      .card.card-primary
+        .card-header
+          h3.card-title
+            | Quick Example 
+            small jQuery Validation
+        // /.card-header
+        // form start
+        form#quickForm(role='form' action="" + baseUrl + "/signin" method="post")
+          .card-body
+            .form-group
+              label(for='login') Логин
+              input#login.form-control(type='text' name='login')
+            .form-group
+              label(for='password') Пароль
+              input#password.form-control(type='password' name='password')
+            .form-group.mb-0
+              label.text-error-signin= error
+          // /.card-body
+          .card-footer
+            button.btn.btn-primary(type='submit') Войти
 
-
-    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
-    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+  // ./wrapper
+  // jQuery
+  script(src='/public/plugins/jquery/jquery.min.js')
+  // Bootstrap 4
+  script(src='/public/plugins/bootstrap/js/bootstrap.bundle.min.js')
+  // overlayScrollbars
+  script(src='/public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')
+  // AdminLTE App
+  script(src='/public/js/adminlte.min.js')
+  // AdminLTE for demo purposes
+  script(src='/public/js/demo.js')

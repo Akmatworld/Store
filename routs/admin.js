@@ -9,6 +9,7 @@ function checkSession(req, res, next) {
         next();
     }
 }
+
 function checkSessionSignin (req, res, next) {
     if (!!req.session.login) {
         res.redirect(req.baseUrl + '/');
@@ -16,6 +17,7 @@ function checkSessionSignin (req, res, next) {
         next();
     }
 }
+
 // Logout & Sign in
 adminRoute.get('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -23,9 +25,11 @@ adminRoute.get('/logout', (req, res) => {
         res.redirect('/sadmin/');
     });
 });
+
 adminRoute.get('/signin', checkSessionSignin, (req, res) => {
-    res.render('admin/signin', {title: 'Вход в систему'});
+    res.render('admin/signin', {title: 'Вход в систему', baseUrl: req.baseUrl});
 });
+
 adminRoute.post('/signin', (req, res) => {
     new Authorization(req, res).auth();
 });
@@ -35,7 +39,7 @@ adminRoute.get('/', checkSession, (req, res) => {
 });
 
 adminRoute.get('/productlist', checkSession, (req, res) => {
-    res.render('admin/productlist', {title: 'Продукты',  login: req.session.login, baseUrl: req.baseUrl});
+    res.render('admin/productlist', {title: 'Список продуктов',  login: req.session.login, baseUrl: req.baseUrl});
 });
 
 adminRoute.get('/addproduct', checkSession, (req, res) => {
@@ -44,6 +48,14 @@ adminRoute.get('/addproduct', checkSession, (req, res) => {
 
 adminRoute.get('/settings', checkSession, (req, res) => {
     res.render('admin/settings', {title: 'Настройки',  login: req.session.login, baseUrl: req.baseUrl});
+});
+
+adminRoute.get('/neworder', checkSession, (req, res) => {
+    res.render('admin/neworder', {title: 'Новый заказ',  login: req.session.login, baseUrl: req.baseUrl});
+});
+
+adminRoute.get('/processedorder', checkSession, (req, res) => {
+    res.render('admin/processedorder', {title: 'Обработанные заказы',  login: req.session.login, baseUrl: req.baseUrl});
 });
 
 adminRoute.get('/users', checkSession, (req, res) => {

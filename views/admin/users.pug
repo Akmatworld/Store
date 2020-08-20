@@ -1,27 +1,51 @@
 include head.pug
-body
-  .container
-    include sidebar.pug
-    .content
-      h3.content-title Список пользователей системы
-      if data.length
-        table.table
-          thead.thead-dark
-            tr
-              th(scope='col') ФИО
-              th(scope='col') Доступ
-              th(scope='col') Управление
-          tbody
-            each obj in data
-              tr
-                td= obj.fname + ' ' + obj.name
-                td= obj.permission
-                td.users-list-form
-                  a(href=""+ baseUrl + "/users/" + obj.id)
-                    button(class="btn btn-info") Посмотреть
-                  a(href="" + baseUrl + "/users/detele/" + obj.id)
-                    button(class="btn btn-danger") Удалить
-      else
-        p Список пользователей пуст 
+// Site wrapper
+.wrapper
+  // Navbar
+  include navbar.pug
 
-  include footer.pug
+  // Main Sidebar Container
+  include sidebar.pug
+
+  // Content Wrapper. Contains page content
+  .content-wrapper
+    // Content Header (Page header)
+
+    // Main content
+    section.content
+      .container-fluid
+        .row
+          .col-12
+            // Default box
+            .card.custom-content
+              .card-header
+                h3.card-title Title
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse' data-toggle='tooltip' title='Collapse')
+                    i.fas.fa-minus
+                  button.btn.btn-tool(type='button' data-card-widget='remove' data-toggle='tooltip' title='Remove')
+                    i.fas.fa-times
+              .card-body
+                | Users
+              // /.card-body
+              .card-footer
+                | Footer
+              // /.card-footer
+            // /.card
+    // /.content
+  // /.content-wrapper
+  footer.main-footer
+    strong
+      | Copyright &copy; 2020 
+      | Store Admin Panel
+// ./wrapper
+// jQuery
+script(src='/public/plugins/jquery/jquery.min.js')
+// Bootstrap 4
+script(src='/public/plugins/bootstrap/js/bootstrap.bundle.min.js')
+// overlayScrollbars
+script(src='/public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')
+// AdminLTE App
+script(src='/public/js/adminlte.min.js')
+// AdminLTE for demo purposes
+script(src='/public/js/demo.js')
