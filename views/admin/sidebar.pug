@@ -1,18 +1,52 @@
-.sidebar
-  h3.adminpaneltitle
-    a(href= baseUrl) Админ панель
-  p.login-text Вы вошли как&nbsp;
-    a(href=""+ baseUrl +"account/ " + id+ "") 
-      span= login
-  nav
-    ul
-      li
-        a(href=""+ baseUrl +"/productlist/") Список товаров
-      li
-        a(href=""+ baseUrl +"/addproduct") Добавить новый товар
-      li
-        a(href=""+ baseUrl +"/settings") Настройки
-      li
-        a(href=""+ baseUrl +"/users") Пользователи
-      li
-        a(href=""+ baseUrl +"/logout") Выйти
+aside.main-sidebar.sidebar-dark-primary.elevation-4
+  // Brand Logo
+  a.brand-link(href='../../index3.html')
+    img.brand-image.img-circle.elevation-3(src='/public/img/AdminLTELogo.png' alt='AdminLTE Logo' style='opacity: 0.8;')
+    span.brand-text.font-weight-light AdminLTE 3
+  // Sidebar
+  .sidebar
+    // Sidebar user (optional)
+    .user-panel.mt-3.pb-3.mb-3.d-flex
+      .image
+        img.img-circle.elevation-2(src='/public/img/user2-160x160.jpg' alt='User Image')
+      .info
+        a.d-block(href='#') Alexander Pierce
+    // Sidebar Menu
+    nav.mt-2
+      ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview' role='menu' data-accordion='false')
+        //
+          Add icons to the links using the .nav-icon class
+          with font-awesome or any other icon font library
+        li.nav-item
+          a.nav-link(href='../gallery.html')
+            i.fas.fa-users.custom-style-icon
+            p.link-space-left
+              | Пользователи
+        li.nav-item
+          a.nav-link(href='../gallery.html')
+            i.fas.fa-tools.custom-style-icon
+            p.link-space-left
+              | Настройки
+        li.nav-header Продукты
+        li.nav-item
+          a.nav-link(href='../gallery.html')
+            i.fas.fa-clipboard-list.custom-style-icon
+            p.link-space-left
+              | Список товаров
+        li.nav-item
+          a.nav-link(href='../gallery.html')
+            i.far.fa-calendar-plus.custom-style-icon
+            p.link-space-left
+              | Добавить новый товар
+        li.nav-header Заказ
+        li.nav-item
+          a.nav-link(href='../gallery.html')
+            i.fas.fa-cart-arrow-down.custom-style-icon
+            p.link-space-left
+              | Новые заказы
+        li.nav-item
+          a.nav-link(href='../gallery.html')
+            i.far.fa-calendar-check.custom-style-icon
+            p.link-space-left
+              | Обработанные заказы
+        

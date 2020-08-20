@@ -1,88 +1,12 @@
-* {
-    padding: 0;
-    margin: 0;
+.custom-content {
+    margin: 10px 0 0 0;
 }
-html, body {
-    height: 100%;
+.link-space-left {
+    margin-left: 15px !important;
 }
-.container {
-    display: flex;
-    height: 100%;
+.custom-style-icon {
+    font-size: 18px;
 }
-/* Side bar */ 
-.sidebar {
-    max-width: 200px;
-    flex-grow: 2;
-    border-right: 1px solid #ccc;
-}
-.sidebar ul li {
-    list-style: none;
-    padding: 4px 4px 0 0;
-}
-.sidebar a {
-    text-decoration: none;
-}
-.content {
-    flex-grow: 10;
-}
-
-/* Sign in */
-.signin {
-    margin: 0 auto;
-}
-.signin h1 {
-    text-align: center;
-    margin: 20px 0 20px;
-}
-
-/* Class for error text */
-.error-text {
-    color: red;
-}
-
-/* Admin panel title */
-.adminpaneltitle a {
-    color: #000;
-}
-.adminpaneltitle a:hover {
-    color: rgb(136, 129, 129);
-}
-
-/* 404 admin page */
-.error-404-div {
-    text-align: center;
-}
-.error-404-div h1 {
-    margin: 20px 0;
-}
-
-.back-to-home404 {
-    text-decoration: none;
-    border: 1px solid #888;
-    padding: 4px 7px;
-}
-.back-to-home404:hover {
-    text-decoration: none;
-    background-color: rgb(5, 37, 73);
-    color: #fff;
-}
-
-/* Content */
-.content-title {
-    font-size: 22px;
-    margin: 12px 0;
-    text-align: center;
-}
-.content table {
-    font-size: 15px;
-}
-.content table td,
-.content table th {
-    padding: 2px;
-}
-
-/* List of users */
-.users-list-form {
-    display: flex;
-    justify-content: space-around;
+.exit {
+    margin-left: 5px;
 }
