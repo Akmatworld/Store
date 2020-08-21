@@ -15,37 +15,26 @@ include head.pug
     section.content
       .container-fluid
         .row
-          .col-12
+          .col-6
             // Default box
             .card.custom-content
               .card-header
-                h3.card-title Title
-                .card-tools
-                  button.btn.btn-tool(type='button' data-card-widget='collapse' data-toggle='tooltip' title='Collapse')
-                    i.fas.fa-minus
-                  button.btn.btn-tool(type='button' data-card-widget='remove' data-toggle='tooltip' title='Remove')
-                    i.fas.fa-times
+                h3.card-title Список пользователей
+                
               .card-body
-                | Users
-              // /.card-body
-              .card-footer
-                | Footer
-              // /.card-footer
-            // /.card
-    // /.content
+                .card
+                  .card-body.p-0
+                    table.table.table-sm
+                      thead
+                      tbody
+                        each user in data  
+                          tr
+                            td.custom-full-name-padding= user.fname + ' ' + user.name
+                            td.custom-display-view-edit-users
+                              a(href="" + baseUrl + "/users/" + user.id)
+                                button(type="button").btn.btn-block.btn-info.btn-sm.custom-info-btn-with Подробный просмотр
+                              a(href="" + baseUrl + "/users/edit/" + user.id)
+                                i.fas.fa-edit.custom-icon-edit-color
+
   // /.content-wrapper
-  footer.main-footer
-    strong
-      | Copyright &copy; 2020 
-      | Store Admin Panel
-// ./wrapper
-// jQuery
-script(src='/public/plugins/jquery/jquery.min.js')
-// Bootstrap 4
-script(src='/public/plugins/bootstrap/js/bootstrap.bundle.min.js')
-// overlayScrollbars
-script(src='/public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')
-// AdminLTE App
-script(src='/public/js/adminlte.min.js')
-// AdminLTE for demo purposes
-script(src='/public/js/demo.js')
+  include footer.pug

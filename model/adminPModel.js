@@ -1,5 +1,5 @@
 const db = require('../db/connection.js');
-
+const {returnObjectDataForTemplate} = require('../model/func.js');
 
 class adminPModel {
   constructor(body) {
@@ -35,19 +35,19 @@ class Authorization {
 
   auth() {
     if (!this.login || !this.password) {
-      this.res.render('admin/signin', {title: 'Вход в систему', error: 'Логин или пароль пустой'});
+      this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль пустой', req: this.req}));
     } else {
-        let sql = `SELECT login, password FROM adminpanel WHERE login='${this.login}' AND password='${this.password}'`;
+      let sql = `SELECT login, password FROM adminpanel WHERE login='${this.login}' AND password='${this.password}'`;
 
-        db.query(sql, (error, results, fields) => {
-            if (error) throw error;
-            if (results.length) {
-                this.req.session.login = this.login;
-                this.res.redirect('/sadmin/');
-            } else {
-                this.res.render('admin/signin', {title: 'Вход в систему', error: 'Логин или пароль не правильный', baseUrl: this.req.baseUrl});
-            }
-        });
+      db.query(sql, (error, results, fields) => {
+          if (error) throw error;
+          if (results.length) {
+              this.req.session.login = this.login;
+              this.res.redirect('/sadmin/');
+          } else {
+              this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль не правильный', req: this.req}));
+          }
+      });
     }
   }
 }
@@ -74,9 +74,9 @@ class Users {
             }
           }
 
-          this.res.render('admin/users', {title: 'Пользователи',  data: results, login: this.req.session.login, baseUrl: this.req.baseUrl});
+          this.res.render('admin/users', returnObjectDataForTemplate({title: 'Пользователи',  data: results, req: this.req}));
         } else {
-          this.res.render('admin/users', {title: 'Пользователи',  data: [], login: this.req.session.login, baseUrl: this.req.baseUrl});
+          this.res.render('admin/users', returnObjectDataForTemplate({title: 'Пользователи',  data: [], req: this.req}));
         }
     });
   }
@@ -88,9 +88,9 @@ class Users {
         
         if (results.length) {
           results[0].permission = (results[0].permission === 0) ? 'Админ' : 'Редактор';
-          this.res.render('admin/user', {title: 'Пользователи',  data: results[0], login: this.req.session.login, baseUrl: this.req.baseUrl});
+          this.res.render('admin/user', returnObjectDataForTemplate({title: 'Пользователи',  data: results[0], req: this.req}));
         } else {
-          this.res.render('admin/user', {title: 'Пользователи',  data: {}, login: this.req.session.login, baseUrl: this.req.baseUrl});
+          this.res.render('admin/user', returnObjectDataForTemplate({title: 'Пользователи',  data: {}, req: this.req}));
         }
     });
   }

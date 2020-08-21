@@ -36,8 +36,30 @@ html, body {
     align-items: center;
     height: 100%;
 }
+.custom-title-signin {
+    text-align: center;
+}
 .text-error-signin {
     color: red;
     font-weight: normal;
     font-size: 18px;
+}
+
+/* users */
+.custom-info-btn-with {
+    width: auto;
+}
+.custom-display-view-edit-users {
+    display: flex;
+    justify-content: space-evenly;
+}
+.custom-icon-edit-color {
+    color: #000;
+    margin-top: 7px;
+}
+.custom-icon-edit-color:hover {
+    color: #888;
+}
+.custom-full-name-padding {
+    padding-top: 7px !important;
 }

@@ -15,24 +15,37 @@ include head.pug
     section.content
       .container-fluid
         .row
-          .col-12
+          .col-6
             // Default box
             .card.custom-content
+              .card.custom-content
               .card-header
-                h3.card-title Title
-                .card-tools
-                  button.btn.btn-tool(type='button' data-card-widget='collapse' data-toggle='tooltip' title='Collapse')
-                    i.fas.fa-minus
-                  button.btn.btn-tool(type='button' data-card-widget='remove' data-toggle='tooltip' title='Remove')
-                    i.fas.fa-times
+                h3.card-title Подробная информация о пользователе #{data.name}
+                
               .card-body
-                | User
-              // /.card-body
-              .card-footer
-                | Footer
-              // /.card-footer
-            // /.card
-    // /.content
+                .card
+                  .card-body.p-0
+                    table.table.table-sm
+                      thead
+                      tbody                        
+                        tr
+                          td(style='width: 40px') Фамилия:
+                          td=data.fname
+                        tr
+                          td(style="width: 40px") Имя:
+                          td= data.name
+                        tr
+                          td(style="width: 40px") Email:
+                          td= data.email
+                        tr
+                          td(style="width: 40px") Телефон:
+                          td= data.phone
+                        tr
+                          td(style="width: 40px") Login:
+                          td= data.login
+                        tr
+                          td(style="width: 40px") Доступ:
+                          td= data.permission
   // /.content-wrapper
   footer.main-footer
     strong
