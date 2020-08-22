@@ -1,30 +1,6 @@
 const db = require('../db/connection.js');
 const {returnObjectDataForTemplate} = require('../model/func.js');
 
-class adminPModel {
-  constructor(body) {
-    this.fname = body.fname.trim();
-    this.name = body.name.trim();
-    this.email = body.email.trim();
-    this.phone = body.phone.trim();
-    this.login = body.login.trim();
-    this.password = body.password[0];
-  }
-  addToDb (req, res) {
-    let table = 'adminpanel';
-    let columns = 'fname, name, email, phone, login, password, photo';
-    let values = `'${this.fname}', '${this.name}', '${this.email}', '${this.phone}', '${this.login}', '${this.password}', './photo/1.jpg'`;
-    let sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`;
-    console.log(sql);
-    
-    db.query(sql, (error, results, fields) => {
-      if (error) throw error;
-      req.session.login = this.login;
-      res.redirect('/sadmin/');
-    });
-  }
-}
-
 class Authorization {
   constructor(req, res) {
     this.req = req;
@@ -94,10 +70,12 @@ class Users {
         }
     });
   }
+  addNewUser() {
+
+  }
 }
 
 module.exports = {
-  adminPModel,
   Authorization,
   Users
 };
