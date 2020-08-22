@@ -107,6 +107,7 @@ class Users {
         let avatar = this.req.files.photo;
         let pathArr = __dirname.split('/');
         let pathImage = pathArr.splice(0, pathArr.length -1).join('/') + '/adminstatic/uploads/' + avatar.name;
+        let urlForDb = '/private/uploads/' + avatar.name;
 
         avatar.mv(pathImage, (err) => {
             if (err) throw err;
@@ -114,7 +115,7 @@ class Users {
         // Query to database
         let table = 'adminpanel_users';
         let columns = 'fname, name, email, phone, login, password, photo, permission';
-        let values = `'${fname}', '${name}', '${email}', '${phone}', '${login}', '${password[0]}', '${pathImage}', '${permission}'`;
+        let values = `'${fname}', '${name}', '${email}', '${phone}', '${login}', '${password[0]}', '${urlForDb}', '${permission}'`;
         let sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`;
         console.log(sql);
         
