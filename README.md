@@ -20,6 +20,15 @@ module.exports = { // Here example data for fill in
     database : 'cars' // datebase
 };
 ```
+After the database configure you need to create a file called sess.config.js in the root folder and than you need to set a session option such as secret key.
+Here is an example:
+```sh
+sess.config.js
+
+module.exports = {
+    secret: 'secretkey' // Here will be your secret key
+};
+```
 Now you can run this project with following command on your terminal:
 ```sh
 npm run start

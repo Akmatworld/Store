@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const db = require('./db/connection.js');
 const dbConfig = require('./db/db.config.js');
+const sessConf = require('./sess.config.js');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
 const app = express();
@@ -27,8 +28,8 @@ const options = {
 const sessionStore = new MySQLStore(options);
 app.use(session(
     { 
-        secret: 'secretkeyforme',
-        name: 'mySessionID',
+        secret: sessConf.secretkey,
+        name: 'SESSID',
         store: sessionStore,
         resave: false,
         saveUninitialized: false
