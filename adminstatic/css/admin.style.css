@@ -49,6 +49,7 @@ html, body {
 }
 .success-message {
     color: green;
+    float: right;
 }
 .error-text {
     display: inline;
