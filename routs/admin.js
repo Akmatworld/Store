@@ -52,6 +52,14 @@ adminRoute.get('/users/:id', checkSession, (req, res) => {
     new Users(req, res).getUser();
 });
 
+adminRoute.get('/addnewuser', checkSession, (req, res) => {
+    res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', req }));
+});
+
+adminRoute.post('/addnewuser', checkSession, (req, res) => {
+    new Users(req, res).addNewUser();
+});
+
 adminRoute.get('/users/:action/:id', checkSession, (req, res) => {
     console.log(req.params);
     if (req.params.action === 'delete') {

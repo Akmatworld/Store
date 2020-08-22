@@ -4,6 +4,7 @@ const db = require('./db/connection.js');
 const dbConfig = require('./db/db.config.js');
 const sessConf = require('./sess.config.js');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 8080;
 const app = express();
 // Import routes
@@ -11,10 +12,13 @@ const admin = require('./routs/admin.js');
 
 
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/private', express.static(__dirname + '/adminstatic'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(fileUpload());
 app.set('views', './views');
 app.set('view engine', 'pug');
+
 
 const MySQLStore = require('express-mysql-session')(session);
 // Options for session store
@@ -36,7 +40,6 @@ app.use(session(
     }
 ));
 
-// Routes
 // Front end
 app.get('/', (req, res) => {
     res.send('ok');

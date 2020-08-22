@@ -1,0 +1,74 @@
+include head.pug
+// Site wrapper
+.wrapper
+  // Navbar
+  include navbar.pug
+
+  // Main Sidebar Container
+  include sidebar.pug
+
+  // Content Wrapper. Contains page content
+  .content-wrapper
+    // Content Header (Page header)
+
+    // Main content
+    section.content
+      .container-fluid
+        .row
+          .col-6.custom-bottom-content-place
+            .card.custom-content
+              .card-header
+                h3.card-title Добавление нового пользователя
+                p.error-text= error
+                p.success-message= message
+              // /.card-header
+              // form start
+              form(role='form' action=''+ baseUrl + '/addnewuser' method='post' enctype='multipart/form-data')
+                .card-body
+                  .form-group
+                    label(for='fname') Фамилия *
+                    input#fname.form-control(type='text' name='fname' value= data.fname)
+                  .form-group
+                    label(for='name') Имя *
+                    input#name.form-control(type='text' name='name' value= data.name)
+                  .form-group
+                    label(for='email') Email *
+                    input#email.form-control(type='email' name='email' value= data.email)
+                  .form-group
+                    label(for='phone') Телефон *
+                    input#phone.form-control(type="tel" name="phone" required value= data.phone)
+                  .form-group
+                    label(for='login') Логин *
+                    input#login.form-control(type='text' name='login' value= data.login)
+                  .form-group
+                    label(for='password') Пароль *
+                    input#password.form-control(type='password' name='password')
+                  .form-group
+                    label(for='password') Повторить пароль *
+                    input#password.form-control(type='password' name='password')
+                  .form-group
+                    label Доступ
+                    select.custom-select(name='permission')
+                      option(value=0) Админ
+                      option(value=1) Редактор
+
+                  .form-group
+                    label(for='avatarlabel') Аватар
+                    .input-group
+                      .custom-file
+                        input#avatarlabel.custom-file-input(type='file' name='photo')
+                        label.custom-file-label(for='avatarlabel') Выберите фото
+                    span.info-container
+                      span.info Поддерживаемые форматы: jpg, jpeg, png
+
+                  // /.card-body
+                .card-footer
+                  button.btn.btn-primary.add-new-user-button(type='submit') Добавить
+
+  // /.content-wrapper
+  include footer.pug
+  script(src='/private/plugins/bs-custom-file-input/bs-custom-file-input.min.js')
+  script(type='text/javascript').
+    $(document).ready(function () {
+      bsCustomFileInput.init();
+    });
