@@ -80,16 +80,17 @@ class Users {
     let permission = this.req.body.permission;
 
     let data = {fname, name, email, phone, login};
-
+    
     // Checking user data
     if (!fname || !name || !email || !phone || !login) {
-      this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Заполните все поля!', req: this.req}));
+      return this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Заполните все поля!', req: this.req}));
     } else if (typeof password === 'string' || !password[0] || !password[1]) {
-      this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Заполните пароль!', req: this.req}));
+      return this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Заполните пароль!', req: this.req}));
     } else if (password[0] !== password[1]) {
-      this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Пароли не совпадают!', req: this.req}));
+      return this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Пароли не совпадают!', req: this.req}));
     }
-
+    
+    // Encrypte user password with bcrypt
     try {
       if(!this.req.files) {
         let table = 'adminpanel_users';
