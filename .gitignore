@@ -1,6 +1,9 @@
 # db config
 db.config.js
 
+# sess.config
+sess.config.js
+
 # Logs
 logs
 *.log
