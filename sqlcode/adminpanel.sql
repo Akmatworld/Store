@@ -13,3 +13,6 @@ CREATE TABLE `store`.`adminpanel_users` (
     `photo` TEXT NOT NULL , PRIMARY KEY (`id`)) 
     ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci COMMENT = 'Table for admin pannel';
 
+-- root user 
+-- login: root, password: root
+INSERT INTO adminpanel_users (fname, name, email, phone, login, password, permission, photo) VALUES ('Root', 'Root', 'root@example.com', '044114', 'root', '$2b$10$TevQ.sNh/BcYBSCUQcal0udBJpkou6uHVW5mnggQYJ1vm1KPEdiEm', '0', '');
