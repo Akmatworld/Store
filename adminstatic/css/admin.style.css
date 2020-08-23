@@ -84,3 +84,6 @@ html, body {
 .add-new-user-button {
     float: right;
 }
+.form-group {
+    margin-bottom: 0 !important;
+}
