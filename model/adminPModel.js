@@ -1,5 +1,7 @@
 const db = require('../db/connection.js');
 const {returnObjectDataForTemplate} = require('../model/func.js');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 class Authorization {
   constructor(req, res) {
@@ -13,22 +15,29 @@ class Authorization {
     if (!this.login || !this.password) {
       this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль пустой', req: this.req}));
     } else {
-      let sql = `SELECT login, password FROM adminpanel_users WHERE login='${this.login}' AND password='${this.password}'`;
-
+      let sql = `SELECT login, password FROM adminpanel_users WHERE login='${this.login}'`;
+      
       db.query(sql, (error, results, fields) => {
-          if (error) throw error;
-          if (results.length) {
-              this.req.session.login = this.login;
-              this.res.redirect('/sadmin/');
+        if (error) {
+          this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Произошло ошибка в база данных', req: this.req}));
+        } else if (results.length === 0) {
+          this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Такой пользователь не существует!', req: this.req}));
+        }
+        
+        bcrypt.compare(this.password, results[0].password).then((result) => {
+          if (result) {
+            this.req.session.login = this.login;
+            this.res.redirect('/sadmin/');
           } else {
-              this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль не правильный', req: this.req}));
+            this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль не правильный', req: this.req}));
           }
+        });
       });
     }
   }
 }
 
-// Get list of users
+// Get list of users, add new user, get one of the users
 class Users {
   constructor(req, res) {
     this.req = req;
@@ -89,45 +98,44 @@ class Users {
     } else if (password[0] !== password[1]) {
       return this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', data, error: 'Пароли не совпадают!', req: this.req}));
     }
-    
-    // Encrypte user password with bcrypt
-    try {
-      if(!this.req.files) {
-        let table = 'adminpanel_users';
-        let columns = 'fname, name, email, phone, login, password, permission, photo';
-        let values = `'${fname}', '${name}', '${email}', '${phone}', '${login}', '${password[0]}', '${permission}', ''`;
-        let sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`;
-        console.log(sql);
-        
-        db.query(sql, (error, results, fields) => {
-          if (error) throw error;
-          this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', message: 'Пользователь успешно создан', req: this.req}));
-        });
-      } else {
-        //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-        let avatar = this.req.files.photo;
-        let pathArr = __dirname.split('/');
-        let pathImage = pathArr.splice(0, pathArr.length -1).join('/') + '/adminstatic/uploads/' + avatar.name;
-        let urlForDb = '/private/uploads/' + avatar.name;
-
-        avatar.mv(pathImage, (err) => {
-            if (err) throw err;
-        });
-        // Query to database
-        let table = 'adminpanel_users';
-        let columns = 'fname, name, email, phone, login, password, photo, permission';
-        let values = `'${fname}', '${name}', '${email}', '${phone}', '${login}', '${password[0]}', '${urlForDb}', '${permission}'`;
-        let sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`;
-        console.log(sql);
-        
-        db.query(sql, (error, results, fields) => {
-          if (error) throw error;
-          this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', message: 'Пользователь успешно создан', req: this.req}));
-        });
+    // Encrypte user password with bcrypt and add to the db
+    bcrypt.hash(password[0], saltRounds).then((hashedpassword) => {
+      try {
+        if(!this.req.files) {
+          let table = 'adminpanel_users';
+          let columns = 'fname, name, email, phone, login, password, permission, photo';
+          let values = `'${fname}', '${name}', '${email}', '${phone}', '${login}', '${hashedpassword}', '${permission}', ''`;
+          let sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`;
+          
+          db.query(sql, (error, results, fields) => {
+            if (error) throw error;
+            this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', message: 'Пользователь успешно создан', req: this.req}));
+          });
+        } else {
+          //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+          let avatar = this.req.files.photo;
+          let pathArr = __dirname.split('/');
+          let pathImage = pathArr.splice(0, pathArr.length -1).join('/') + '/adminstatic/uploads/' + avatar.name;
+          let urlForDb = '/private/uploads/' + avatar.name;
+  
+          avatar.mv(pathImage, (err) => {
+              if (err) throw err;
+          });
+          // Query to database
+          let table = 'adminpanel_users';
+          let columns = 'fname, name, email, phone, login, password, photo, permission';
+          let values = `'${fname}', '${name}', '${email}', '${phone}', '${login}', '${hashedpassword}', '${urlForDb}', '${permission}'`;
+          let sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`;
+          
+          db.query(sql, (error, results, fields) => {
+            if (error) throw error;
+            this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', message: 'Пользователь успешно создан', req: this.req}));
+          });
+        }
+      } catch (err) {
+        this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', error: 'Произошло ошибка при загрузке изображения!' + err, req: this.req}));
       }
-    } catch (err) {
-      this.res.render('admin/addnewuser', returnObjectDataForTemplate({title: 'Добавление нового пользователя', error: 'Произошло ошибка при загрузке изображения!' + err, req: this.req}));
-    }
+    });
   }
 }
 

@@ -8,7 +8,7 @@ function checkSession(req, res, next) {
 
 function checkSessionSignin (req, res, next) {
   if (!!req.session.login) {
-      res.redirect(req.baseUrl + '/');
+    res.redirect(req.baseUrl + '/');
   } else {
       next();
   }
