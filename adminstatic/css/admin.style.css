@@ -52,7 +52,6 @@ html, body {
     float: right;
 }
 .error-text {
-    display: inline;
     float: right;
 }
 /* users */
@@ -74,10 +73,13 @@ html, body {
     padding-top: 7px !important;
 }
 
+/* user */
+.user-photo {
+    width: 300px;
+}
 
 /* Add new user */
 .button-add-new-user {
-    display: inline-block;
     width: auto;
     float: right;
 }

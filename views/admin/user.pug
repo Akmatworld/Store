@@ -25,6 +25,7 @@ include head.pug
               .card-body
                 .card
                   .card-body.p-0
+                    img(src= data.photo).user-photo
                     table.table.table-sm
                       thead
                       tbody                        
@@ -46,9 +47,6 @@ include head.pug
                         tr
                           td(style="width: 40px") Доступ:
                           td= data.permission
-                        tr
-                          td
-                            img(src= data.photo)
   // /.content-wrapper
   footer.main-footer
     strong

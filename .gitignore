@@ -4,6 +4,9 @@ db.config.js
 # sess.config
 sess.config.js
 
+# admin static uploads
+adminstatic/uploads/
+
 # Logs
 logs
 *.log
