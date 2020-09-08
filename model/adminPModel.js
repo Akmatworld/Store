@@ -1,6 +1,8 @@
 const db = require('../db/connection.js');
 const {returnObjectDataForTemplate} = require('../model/func.js');
 const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
+const path = require('path');
 const saltRounds = 10;
 
 class Authorization {
@@ -13,23 +15,23 @@ class Authorization {
 
   auth() {
     if (!this.login || !this.password) {
-      this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль пустой', req: this.req}));
+      return this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль пустой', req: this.req}));
     } else {
       let sql = `SELECT login, password FROM adminpanel_users WHERE login='${this.login}'`;
       
       db.query(sql, (error, results, fields) => {
         if (error) {
-          this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Произошло ошибка в база данных', req: this.req}));
+          return this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Произошло ошибка в база данных', req: this.req}));
         } else if (results.length === 0) {
-          this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Такой пользователь не существует!', req: this.req}));
+          return this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Такой пользователь не существует!', req: this.req}));
         }
-        
+
         bcrypt.compare(this.password, results[0].password).then((result) => {
           if (result) {
             this.req.session.login = this.login;
-            this.res.redirect('/sadmin/');
+            return this.res.redirect('/sadmin/');
           } else {
-            this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль не правильный', req: this.req}));
+            return this.res.render('admin/signin', returnObjectDataForTemplate({title: 'Вход в систему', error: 'Логин или пароль не правильный', req: this.req}));
           }
         });
       });
@@ -115,8 +117,9 @@ class Users {
           //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
           let avatar = this.req.files.photo;
           let pathArr = __dirname.split('/');
-          let pathImage = pathArr.splice(0, pathArr.length -1).join('/') + '/adminstatic/uploads/' + avatar.name;
-          let urlForDb = '/private/uploads/' + avatar.name;
+          let newFileName = uuidv4() + path.extname(avatar.name);
+          let pathImage = pathArr.splice(0, pathArr.length -1).join('/') + '/adminstatic/uploads/' + newFileName;
+          let urlForDb = '/private/uploads/' + newFileName;
   
           avatar.mv(pathImage, (err) => {
               if (err) throw err;
